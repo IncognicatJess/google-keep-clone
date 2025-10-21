@@ -17,12 +17,3 @@ function Header() {
 }
 
 export default Header;
-
-<input
-  type="text"
-  placeholder="Cari catatan..."
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-  style={{ margin: "10px", padding: "8px", width: "90%" }}
-/>
-
