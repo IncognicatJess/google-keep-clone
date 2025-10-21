@@ -26,3 +26,12 @@ m3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.4
 }
 
 export default Header;
+
+<input
+  type="text"
+  placeholder="Cari catatan..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+  style={{ margin: "10px", padding: "8px", width: "90%" }}
+/>
+
