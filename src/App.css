@@ -3,7 +3,7 @@
   background-color: #fff;
 }
 .app-main {
-  padding-bottom: 32px;
+  padding-bottom: 32px 48px;
 }
 /* Loading animation (optional) */
 @keyframes fadeIn {
