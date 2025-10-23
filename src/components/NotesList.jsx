@@ -1,7 +1,7 @@
 import React from "react";
 import Note from "./Note";
 import "./NotesList.css";
-function NotesList({ notes, updateNote, deleteNote }) {
+function NotesList({ notes, updateNote, deleteNote, togglePin }) {
   // Show message if no notes exist
   if (notes.length === 0) {
     return (
@@ -19,18 +19,45 @@ m3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.4
       </div>
     );
   }
+
+  const pinnedNotes = notes.filter((note) => note.pinned);
+  const otherNotes = notes.filter((note) => !note.pinned);
+
   return (
     <div className="notes-container">
-      <div className="notes-grid">
-        {notes.map((note) => (
-          <Note
-            key={note.id}
-            note={note}
-            updateNote={updateNote}
-            deleteNote={deleteNote}
-          />
-        ))}
-      </div>
+      {pinnedNotes.length > 0 && (
+        <>
+          <h3 className="section-title">📌 Pinned</h3>
+          <div className="notes-grid">
+            {pinnedNotes.map((note) => (
+              <Note
+                key={note.id}
+                note={note}
+                updateNote={updateNote}
+                deleteNote={deleteNote}
+                togglePin={togglePin}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      {otherNotes.length > 0 && (
+        <>
+          {pinnedNotes.length > 0 && <h3 className="section-title">Others</h3>}
+          <div className="notes-grid">
+            {otherNotes.map((note) => (
+              <Note
+                key={note.id}
+                note={note}
+                updateNote={updateNote}
+                deleteNote={deleteNote}
+                togglePin={togglePin}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

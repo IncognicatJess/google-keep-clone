@@ -6,7 +6,7 @@ import "./App.css";
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [search, setSearch] = useState(""); 
+  const [search, setSearch] = useState("");
 
   // Load data dari localStorage
   useEffect(() => {
@@ -19,16 +19,32 @@ function App() {
     localStorage.setItem("keepNotes", JSON.stringify(notes));
   }, [notes]);
 
-  const addNote = (data) => {
-    const newNote = { id: Date.now(), ...data };
+  // Function to toggle pin/unpin
+  const togglePin = (id) => {
+    setNotes(
+      notes.map((note) =>
+        note.id === id ? { ...note, pinned: !note.pinned } : note
+      )
+    );
+  };
+
+  // Function to add a new note
+  const addNote = (noteData) => {
+    const newNote = {
+      id: Date.now(),
+      title: noteData.title,
+      content: noteData.content,
+      createdAt: new Date().toISOString(),
+      pinned: false, // ✅ new property
+    };
+
     setNotes([newNote, ...notes]);
   };
 
   const updateNote = (id, updated) =>
     setNotes(notes.map((note) => (note.id === id ? updated : note)));
 
-  const deleteNote = (id) =>
-    setNotes(notes.filter((note) => note.id !== id));
+  const deleteNote = (id) => setNotes(notes.filter((note) => note.id !== id));
 
   // 🟨 Bagian INI yang dimaksud "Filter Daftar Catatan Sebelum Ditampilkan"
   const filteredNotes = notes.filter(
@@ -58,6 +74,7 @@ function App() {
           notes={filteredNotes}
           updateNote={updateNote}
           deleteNote={deleteNote}
+          togglePin={togglePin}
         />
       </main>
     </div>
