@@ -1,7 +1,7 @@
 note {
   background-color: #fff;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 9px;
   padding: 16px;
   transition: box-shadow 0.2s, transform 0.2s;
   break-inside: avoid;
@@ -14,10 +14,15 @@ note {
 }
 .note-view {
   min-height: 100px;
+  padding : 1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
 }
 .note-title {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   color: #202124;
   margin-bottom: 12px;
   word-wrap: break-word;
@@ -28,6 +33,8 @@ note {
   line-height: 1.5;
   white-space: pre-wrap;
   word-wrap: break-word;
+  padding: 0.5vh;
+  flex-grow: 1;
 }
 .note-actions {
   display: flex;
@@ -79,12 +86,18 @@ note {
 }
 .note-edit-input:focus,
 .note-edit-textarea:focus {
-  border-color: #fbc02d;
+  border-color: #2dc4fb;
 }
 .note-edit-textarea {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 8px 12px;
   resize: vertical;
   min-height: 80px;
   line-height: 1.5;
+
+  box-sizing: border-box;
 }
 .note-edit-actions {
   display: flex;
@@ -99,6 +112,7 @@ note {
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin-bottom: 1vh;
 }
 .note-button-save {
   background-color: #fbc02d;
@@ -114,4 +128,31 @@ note-button-save:hover {
 }
 .note-button-cancel:hover {
   background-color: #f1f3f4;
+}
+
+/* --- Tambahkan ini ke Note.css --- */
+
+/* Container untuk palet warna di dalam mode edit */
+.color-palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Posisikan di tengah */
+  gap: 6px;
+  margin-bottom: 12px; /* Beri jarak ke tombol Save/Cancel */
+  padding: 4px;
+}
+
+/* Kotak/lingkaran pilihan warna */
+.color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%; /* Bulat */
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }

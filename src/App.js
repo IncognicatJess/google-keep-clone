@@ -20,7 +20,7 @@ function App() {
   }, [notes]);
 
   const addNote = (data) => {
-    const newNote = { id: Date.now(), ...data };
+    const newNote = { id: Date.now(), ...data, color:"#FFFF" };
     setNotes([newNote, ...notes]);
   };
 

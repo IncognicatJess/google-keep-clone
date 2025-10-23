@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import ColorPalette from "./ColorPalette";
 import "./Note.css";
 
 function Note({ note, updateNote, deleteNote }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(note.title);
   const [editContent, setEditContent] = useState(note.content);
+  const [editColor, setEditColor] = useState(note.color || "#FFFFFF");
 
   // Keep local edit state in sync if the note prop changes
   useEffect(() => {
     setEditTitle(note.title);
     setEditContent(note.content);
-  }, [note.title, note.content]);
+    setEditColor(note.color || "#FFFFFF");
+  }, [note.title, note.content, note.color]);
 
   // Save edited note
   const handleSave = () => {
@@ -19,6 +22,7 @@ function Note({ note, updateNote, deleteNote }) {
       ...note,
       title: editTitle,
       content: editContent,
+      color: editColor,
     });
     setIsEditing(false);
   };
@@ -27,6 +31,7 @@ function Note({ note, updateNote, deleteNote }) {
   const handleCancel = () => {
     setEditTitle(note.title);
     setEditContent(note.content);
+    setEditColor(note.color || "#FFFFFF");
     setIsEditing(false);
   };
 
@@ -37,8 +42,15 @@ function Note({ note, updateNote, deleteNote }) {
     }
   };
 
+  // untuk menangani pemilihan warna
+  const handleColorSelect = (color) => {
+    setEditColor(color); // Update state lokal 'editColor'
+  };
+
   return (
-    <div className="note">
+    <div className="note"
+      style={{backgroundColor: isEditing ? editColor : note.color}}
+      >
       {isEditing ? (
         <div className="note-edit">
           <input
@@ -58,6 +70,9 @@ function Note({ note, updateNote, deleteNote }) {
             className="note-edit-textarea"
             rows={4}
           />
+
+          <ColorPalette onSelectColor={handleColorSelect} />
+
           <div className="note-edit-actions">
             <button
               type="button"
@@ -116,6 +131,7 @@ Note.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     title: PropTypes.string,
     content: PropTypes.string,
+    color: PropTypes.string,
   }).isRequired,
   updateNote: PropTypes.func.isRequired,
   deleteNote: PropTypes.func.isRequired,
