@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.css";
-function Header() {
+function Header({ search, setSearch }) {
   return (
     <header className="header">
       <div className="header-content">
@@ -11,6 +11,16 @@ function Header() {
           />
         </svg>
         <h1 className="header-title">Keep</h1>
+
+        <div className="header-search">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="search-input"
+          />
+        </div>
       </div>
     </header>
   );

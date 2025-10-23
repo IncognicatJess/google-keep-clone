@@ -38,7 +38,7 @@ function App() {
     );
   };
 
-  // 🟨 Bagian INI yang dimaksud "Filter Daftar Catatan Sebelum Ditampilkan"
+  // Filter Daftar Catatan Sebelum Ditampilkan
   const filteredNotes = notes.filter(
     (note) =>
       note.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -47,21 +47,10 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
-
-      {/* Kolom Pencarian */}
-      <input
-        type="text"
-        placeholder="Cari catatan..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{ margin: "10px", padding: "8px", width: "90%" }}
-      />
+      <Header search={search} setSearch={setSearch} />
 
       <main className="app-main">
         <NoteForm addNote={addNote} />
-
-        {/* Ganti notes jadi filteredNotes */}
         <NotesList
           notes={filteredNotes}
           updateNote={updateNote}
