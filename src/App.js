@@ -29,6 +29,15 @@ function App() {
 
   const deleteNote = (id) => setNotes(notes.filter((note) => note.id !== id));
 
+  // Function to toggle pin/unpin
+  const togglePin = (id) => {
+    setNotes(
+      notes.map((note) =>
+        note.id === id ? { ...note, pinned: !note.pinned } : note
+      )
+    );
+  };
+
   // 🟨 Bagian INI yang dimaksud "Filter Daftar Catatan Sebelum Ditampilkan"
   const filteredNotes = notes.filter(
     (note) =>
