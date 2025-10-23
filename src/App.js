@@ -6,7 +6,7 @@ import "./App.css";
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [search, setSearch] = useState(""); 
+  const [search, setSearch] = useState("");
 
   // Load data dari localStorage
   useEffect(() => {
@@ -20,15 +20,14 @@ function App() {
   }, [notes]);
 
   const addNote = (data) => {
-    const newNote = { id: Date.now(), ...data, color:"#FFFF" };
+    const newNote = { id: Date.now(), ...data };
     setNotes([newNote, ...notes]);
   };
 
   const updateNote = (id, updated) =>
     setNotes(notes.map((note) => (note.id === id ? updated : note)));
 
-  const deleteNote = (id) =>
-    setNotes(notes.filter((note) => note.id !== id));
+  const deleteNote = (id) => setNotes(notes.filter((note) => note.id !== id));
 
   // 🟨 Bagian INI yang dimaksud "Filter Daftar Catatan Sebelum Ditampilkan"
   const filteredNotes = notes.filter(
@@ -58,6 +57,7 @@ function App() {
           notes={filteredNotes}
           updateNote={updateNote}
           deleteNote={deleteNote}
+          togglePin={togglePin}
         />
       </main>
     </div>

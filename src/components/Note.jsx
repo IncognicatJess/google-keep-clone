@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ColorPalette from "./ColorPalette";
 import "./Note.css";
 
-function Note({ note, updateNote, deleteNote }) {
+function Note({ note, updateNote, deleteNote, togglePin }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(note.title);
   const [editContent, setEditContent] = useState(note.content);
@@ -95,6 +95,17 @@ function Note({ note, updateNote, deleteNote }) {
           {note.title && <h3 className="note-title">{note.title}</h3>}
           <p className="note-content">{note.content}</p>
           <div className="note-actions">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                togglePin(note.id);
+              }}
+              className="note-pin"
+              title={note.pinned ? "Unpin note" : "Pin note"}
+            >
+              {note.pinned ? "📍" : "📌"}
+            </button>
+
             <button
               type="button"
               onClick={(e) => {
