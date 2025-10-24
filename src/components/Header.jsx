@@ -1,9 +1,12 @@
 import React from "react";
 import "./Header.css";
-function Header({ search, setSearch }) {
+
+function Header({ search, setSearch, onTrashClick, showTrash }) {
   return (
     <header className="header">
       <div className="header-content">
+
+        {/* Logo dan Title */}
         <svg className="header-logo" width="40" height="40" viewBox="0 0 24 24">
           <path
             fill="#fbc02d"
@@ -12,6 +15,7 @@ function Header({ search, setSearch }) {
         </svg>
         <h1 className="header-title">Keep</h1>
 
+        {/* Search */}
         <div className="header-search">
           <input
             type="text"
@@ -21,6 +25,12 @@ function Header({ search, setSearch }) {
             className="search-input"
           />
         </div>
+
+        {/* Tombol untuk buka Trash */}
+        <button className="trash-button" onClick={onTrashClick}>
+          {showTrash ? "Notes" : "Trash"}
+        </button>
+
       </div>
     </header>
   );
